@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Message Board</title>
+</head>
+<body>
+    <h1>The Dojo Message Board</h1>
+    <hr>
+
+    <form action="/post" method="POST">
+        <p>Name:</p>
+        <p><input type="text" name="name"></p>
+        <p>Message: </p>
+        <p><textarea rows="4" cols="60" name="text"></textarea></p>
+        <button>Post Message</button>
+    </form>
+    <hr>
+    <% for (x in data) { %>
+        <h2>Name: <%= data[x].name %></h2>
+        <h2>Message: <%=data[x].text %></h2>
+        <% for (var j = 0; j < data[x].comments.length; j++) { %>
+           <h3>Name: <%= data[x].comments[j].name %></h3> 
+           <h3>Comment: <%= data[x].comments[j].text %></h3> 
+        <% } %>
+        <form action='/posts/<%= data[x].id %>' method="post">
+            <p>Name:</p>
+            <p><input type="text" name="name"></p>
+            <p>Comment:</p>
+            <p><textarea rows="3" cols="50" name="text"></textarea></p>
+            <button>Post comment</button>
+        </form>
+        <% } %>
+
+</body>
+</html>
